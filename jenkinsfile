@@ -9,7 +9,14 @@ pipeline {
         }
         stage('aishu'){
             steps{
+                input('Do you want to proceed?')
                 echo 'this is declartive'
+                echo 'Hello Stage Two - Step 1'
+            }
+        }
+        stage('class'){
+            steps{
+                echo'human intervention'
             }
         }
     }
