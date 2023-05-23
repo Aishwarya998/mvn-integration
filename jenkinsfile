@@ -2,22 +2,36 @@ pipeline {
     agent any
 
     stages {
-        stage('build') {
+        stage('Stage One') {
             steps {
-                echo 'Hello World'
+                echo 'Hello Stage One - Step 1'
+				echo 'Hello Stage One - Step 1' 
+				build job : "myfirstjob"
             }
         }
-        stage('aishu'){
-            steps{
-                input('Do you want to proceed?')
-                echo 'this is declartive'
+		stage('Stage Two') {
+            steps {
+		input('Do you want to proceed?')
                 echo 'Hello Stage Two - Step 1'
+				echo 'Hello Stage Two - Step 2'
             }
         }
-        stage('class'){
-            steps{
-                echo'human intervention'
-            }
+		stage('Stage Three') {
+			parallel {
+				stage('Parallel1') {
+					 steps {
+						ech 'Hello Stage Three - Step 1'
+						echo 'Hello Stage Three - Step 2'
+            				}
+				}
+				stage('Parallel2') {
+					 steps {
+						echo 'Hello Stage Three - Step 3'
+						echo 'Hello Stage Three - Step 4'
+            				}
+				}
+			}
+           
         }
     }
 }
